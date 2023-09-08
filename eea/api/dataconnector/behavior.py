@@ -88,7 +88,7 @@ class DataProviderForFiles(object):
 
 @implementer(IDataProvider)
 @adapter(IElasticConnector, IBrowserRequest)
-class DataProviderForElasticCSVWidget(object):
+class DataProviderForElasticConnectors(object):
     """Behavior implementation for CT with elastic_csv_widget field"""
 
     def __init__(self, context, request):
@@ -98,15 +98,25 @@ class DataProviderForElasticCSVWidget(object):
     @property
     def provided_data(self):
         """provided data"""
-
-        widget = getattr(self.context, 'elastic_csv_widget', None)
-
-        data = widget['tableData'] if widget else {}
-
+        
+        # Fetch data from Elasticsearch (pseudo-code)
+        es_data = self.fetch_data_from_elasticsearch()
+        
+        # Create table data
+        table_data = self.create_table_data(es_data)
+        
         return {
-            "results": data,
+            "results": table_data,
             "metadata": {},  # Add metadata if needed
         }
+        
+    def fetch_data_from_elasticsearch(self):
+        # Implement fetching logic here, returning raw data from ES
+        pass
+        
+    def create_table_data(self, data):
+        # Process the raw ES data as required and return it
+        pass
 
 
 class DataVisualization(MetadataBase):

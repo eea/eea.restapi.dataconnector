@@ -1,18 +1,29 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    i18n_domain="eea"
-    >
+    i18n_domain="eea">
 
-  <i18n:registerTranslations directory="locales" />
+    <!-- Register translations -->
+    <i18n:registerTranslations directory="locales" />
 
-  <adapter factory=".adapter.DataProviderForConnectors" />
-  <adapter factory=".adapter.DataQueryJsonSchemaProvider" name="data_query" />
+    <!-- Register adapter for DataProviderForConnectors -->
+    <adapter factory=".adapter.DataProviderForConnectors" />
 
-  <include file="profiles.zcml" />
-  <include file="behavior.zcml" />
-  <include package=".api" />
-  <include package=".browser" />
-  <include package=".upgrades" />
+    <!-- Register adapter for DataProviderForElasticConnectors -->
+    <adapter
+        factory=".behavior.DataProviderForElasticConnectors"
+        provides="eea.api.dataconnector.interfaces.IDataProvider"
+        for=".interfaces.IElasticConnector
+             zope.publisher.interfaces.browser.IBrowserRequest" />
+
+    <!-- Register adapter for DataQueryJsonSchemaProvider -->
+    <adapter factory=".adapter.DataQueryJsonSchemaProvider" name="data_query" />
+
+    <!-- Include other ZCML files -->
+    <include file="profiles.zcml" />
+    <include file="behavior.zcml" />
+    <include package=".api" />
+    <include package=".browser" />
+    <include package=".upgrades" />
 
 </configure>

@@ -69,8 +69,10 @@ class ElasticConnectorData(object):
         if not expand:
             return result
 
-        result["connector-data"][
-            "data"] = self.context.elastic_csv_widget.tableData
+        connector = getMultiAdapter(
+            (self.context, self.request), IDataProvider
+        )
+        result["connector-data"]["data"] = connector.provided_data
 
         return result
 
