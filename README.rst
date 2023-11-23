@@ -12,6 +12,11 @@ The eea.api.dataconnector is a Plone add-on
 
 .. contents::
 
+Upgrade
+=======
+
+**8.0**
+- Endpoints for @tableau-visualization and @map-visualization are removed. Use volto-eea-map@^3.0.0 and volto-tableau@^7.0.0
 
 Main features
 =============
