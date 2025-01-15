@@ -90,5 +90,16 @@
 
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="8.5"
+    destination="8.6"
+    profile="eea.api.dataconnector:default">
+
+    <genericsetup:upgradeStep
+      title="Upgrade all visualization provider url to resolve uid"
+      handler="eea.api.dataconnector.upgrades.upgrade_visualizations.upgrade_visualizations"
+      />
+
+  </genericsetup:upgradeSteps>
 
 </configure>
